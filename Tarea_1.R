@@ -35,7 +35,7 @@ for(feature in features_data) {
 
 # Ejercicio 3.-
 
-pairs(data_boston_housing, pch= 20, col= 'purple', upper.panel = upper.panel)
+pairs(data_boston_housing, pch= 20, col= 'purple')
 
 # Ejercicio 4.-
 
@@ -62,7 +62,7 @@ pairs(new_data_corr, lower.panel = function(x, y) {
 
 #Ejercicio 8.-
 
-numeroDeColumnas=ncol(data_boston_housing)
+numeroDeColumnas = ncol(data_boston_housing)
 par(mfrow = c(ceiling(sqrt(numeroDeColumnas)), ceiling(sqrt(numeroDeColumnas))))
 
 for (i in 1:numeroDeColumnas) {
@@ -90,19 +90,26 @@ ggdraw() + draw_plot(grid_boxplot) + draw_plot(textGrob("Boxplot Boston Housing"
                                                x= 0.27, y= -0.35)
 
 # Ejercicio 10.-
-ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['rm']])) +
-  geom_point() +
-  geom_smooth(method=lm, se=FALSE) +
-  theme_minimal() +
-  ggtitle('MEDV V/S RM')
+positive_corr = ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['rm']])) +
+                  geom_point() +
+                  geom_smooth(method=lm, se=FALSE) +
+                  theme_minimal() +
+                  ggtitle('MEDV V/S RM')
+negative_corr = ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['lstat']])) +
+                  geom_point() +
+                  geom_smooth(method=lm, se=FALSE) +
+                  theme_minimal() +
+                  ggtitle('MEDV V/S LSTAT')
+
+grid.arrange(positive_corr, negative_corr, ncol = 2)
 
 # Ejercicio 11.-
 for(feature in features_data) {
     asimetria = round(skewness(data_boston_housing[[feature]]), 3)
     curtosis = round(kurtosis(data_boston_housing[[feature]]), 3)
 
-    print(feature)
-    print(paste('Asimetria: ', asimetria, ', Curtosis: ', curtosis, sep = ''))
+    cat(paste(feature, '\n'))
+    cat(paste('Asimetria: ', asimetria, ', Curtosis: ', curtosis, '\n\n', sep = ''))
 }
 
 # Ejercicio 12.-
