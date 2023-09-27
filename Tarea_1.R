@@ -23,9 +23,8 @@ head(data_boston_housing, n = 5)
 mean(data_boston_housing$crim)
 
 # Ejercicio 3.-
-pairs(data_boston_housing, pch= 20, col= 'purple')
 
-ggpairs(data_boston_housing)
+pairs(data_boston_housing, pch= 20, col= 'purple')
 
 # Ejercicio 4.-
 
@@ -35,11 +34,12 @@ print(correlacion)
 #Ejercicio 5.-
 
 options(repr.plot.width = 8, repr.plot.height = 8)
-corrplot(correlacion, method = "number")
+corrplot(correlacion, method = "number", type = 'lower')
+corrplot(correlacion, method = "ellipse", type = 'lower')
 
 #Ejercicio 6.-
 
-corrplot(correlacion, method = "color")
+corrplot(correlacion, method = "color", type = 'lower')
 
 #Ejercicio 7.-
 
@@ -62,7 +62,7 @@ boxplot_list = list()
 size_col = ncol(data_boston_housing)
 
 for(i in 1: size_col) {
-    feature = names(data_boston_housing)[i]
+    feature = features_data[i]
     boxplot_data = ggplot(data_boston_housing, aes(y= .data[[feature]])) +
                    geom_boxplot() +
                    theme_minimal()
@@ -96,7 +96,7 @@ densityplot_list = list()
 size_col = ncol(data_boston_housing)
 
 for(i in 1: size_col) {
-    feature = names(data_boston_housing)[i]
+    feature = features_data[i]
     densityplot_data = ggplot(data_boston_housing, aes(x= .data[[feature]])) +
       geom_density(color = 4,    # Color
                    lwd = 1,      # Ancho
