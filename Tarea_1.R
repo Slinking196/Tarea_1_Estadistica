@@ -20,11 +20,22 @@ data_boston_housing = read.csv("BostonHousing.csv")
 head(data_boston_housing, n = 5)
 
 # Ejercicio 2.-
-mean(data_boston_housing$crim)
+features_data = names(data_boston_housing)
+
+for(feature in features_data) {
+    mean_feature = mean(data_boston_housing[[feature]])
+    median_feature = median(data_boston_housing[[feature]])
+    desv_feature = sd(data_boston_housing[[feature]])
+
+    cat(paste(feature, ':\n', sep = ''))
+    cat(paste('Promedio:', round(mean_feature, 3), '\n'))
+    cat(paste('Mediana:', round(median_feature, 3), '\n'))
+    cat(paste('Desviacion estandar:', round(desv_feature, 3), '\n\n'))
+}
 
 # Ejercicio 3.-
 
-pairs(data_boston_housing, pch= 20, col= 'purple')
+pairs(data_boston_housing, pch= 20, col= 'purple', upper.panel = upper.panel)
 
 # Ejercicio 4.-
 
@@ -43,7 +54,11 @@ corrplot(correlacion, method = "color", type = 'lower')
 
 #Ejercicio 7.-
 
-#ggpairs(data_boston_housing)
+new_data_corr = data_boston_housing[, c("indus", "nox", "age", "dis", "rad", "tax")]
+pairs(new_data_corr, lower.panel = function(x, y) {
+    points(x, y)
+    abline(lm(y ~ x), col = "red")
+}, upper.panel = NULL)
 
 #Ejercicio 8.-
 
