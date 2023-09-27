@@ -146,25 +146,44 @@ resultados_grupo1 = c()
 resultados_grupo2 = c()
 
 for(feature in datos_grupo1) {
-    mean_feature = mean(grupo_1_chas[[feature]])
-    var_feature = var(grupo_1_chas[[feature]])
+    if(feature != 'chas') {
+        mean_feature = mean(grupo_1_chas[[feature]])
+        var_feature = var(grupo_1_chas[[feature]])
 
-    resultados_grupo1 = c(resultados_grupo1, paste(feature, ':\n', sep = ''))
-    resultados_grupo1 = c(resultados_grupo1, paste('Media:', round(mean_feature, 3), '\n'))
-    resultados_grupo1 = c(resultados_grupo1, paste('varianza:', round(var_feature, 3), '\n\n'))
+        resultados_grupo1 = c(resultados_grupo1, paste(feature, ':\n', sep = ''))
+        resultados_grupo1 = c(resultados_grupo1, paste('Media:', round(mean_feature, 3), '\n'))
+        resultados_grupo1 = c(resultados_grupo1, paste('varianza:', round(var_feature, 3), '\n\n'))
+    }
 }
 
 for(feature in datos_grupo2) {
-    mean_feature = mean(grupo_2_chas[[feature]])
-    var_feature = var(grupo_2_chas[[feature]])
+    if(feature != 'chas') {
+        mean_feature = mean(grupo_2_chas[[feature]])
+        var_feature = var(grupo_2_chas[[feature]])
 
-    resultados_grupo2 = c(resultados_grupo2, paste(feature, ':\n', sep = ''))
-    resultados_grupo2 = c(resultados_grupo2, paste('Media:', round(mean_feature, 3), '\n'))
-    resultados_grupo2 = c(resultados_grupo2, paste('varianza:', round(var_feature, 3), '\n\n'))
+        resultados_grupo2 = c(resultados_grupo2, paste(feature, ':\n', sep = ''))
+        resultados_grupo2 = c(resultados_grupo2, paste('Media:', round(mean_feature, 3), '\n'))
+        resultados_grupo2 = c(resultados_grupo2, paste('varianza:', round(var_feature, 3), '\n\n'))
+    }
 }
 
 cat("Resultados Grupo 1:\n", resultados_grupo1, sep = "")
 cat("Resultados Grupo 2:\n", resultados_grupo2, sep = "")
+
+# Ejercicio 15
+
+features_data = names(data_boston_housing)
+
+for(feature in features_data) {
+    if(feature != 'chas') {
+        mean_feature = mean(data_boston_housing[[feature]])
+        var_feature = var(data_boston_housing[[feature]])
+
+        cat(paste(feature, ':\n', sep = ''))
+        cat(paste('Promedio:', round(mean_feature, 3), '\n'))
+        cat(paste('Varianza:', round(desv_feature, 3), '\n\n'))
+    }
+}
 
 # Ejercicio 16
 features_data = names(data_boston_housing)
@@ -192,3 +211,5 @@ for(feature in features_data) {
         cat(paste('Varianza intergrupo:', round(var_inter, 3), '\n\n'))
     }
 }
+
+# Ejercicio 18
