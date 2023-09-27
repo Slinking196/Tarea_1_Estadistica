@@ -136,7 +136,6 @@ ggdraw() + draw_plot(grid_densityplot) + draw_plot(textGrob("Densityplot Boston 
 
 #Ejercicio 13.-
 grupo_1_chas= data_boston_housing[data_boston_housing$chas == 0, ]
-grupo_1_chas
 grupo_2_chas= data_boston_housing[data_boston_housing$chas == 1, ]
 
 #Ejercicio 14
@@ -166,3 +165,4 @@ for(feature in datos_grupo2) {
 
 cat("Resultados Grupo 1:\n", resultados_grupo1, sep = "")
 cat("Resultados Grupo 2:\n", resultados_grupo2, sep = "")
+
