@@ -166,3 +166,29 @@ for(feature in datos_grupo2) {
 cat("Resultados Grupo 1:\n", resultados_grupo1, sep = "")
 cat("Resultados Grupo 2:\n", resultados_grupo2, sep = "")
 
+# Ejercicio 16
+features_data = names(data_boston_housing)
+
+for(feature in features_data) {
+    if (feature != 'chas') {
+        var_inter = as.numeric(nrow(grupo_1_chas) / nrow(data_boston_housing)) * ((mean(grupo_1_chas[[feature]]) -
+                    mean(data_boston_housing[[feature]]))^2 ) + (nrow(grupo_2_chas) / nrow(data_boston_housing)) *
+                    ((mean(grupo_2_chas[[feature]]) - mean(data_boston_housing[[feature]]))^2)
+
+        cat(paste(feature, ':\n'))
+        cat(paste('Varianza Intragrupo:', round(var_intra, 3), '\n\n'))
+    }
+}
+
+# Ejercicio 17
+features_data = names(data_boston_housing)
+
+for(feature in features_data) {
+    if (feature != 'chas') {
+        var_intra = (nrow(grupo_1_chas) / nrow(data_boston_housing)) * var(grupo_1_chas[[feature]]) +
+                    (nrow(grupo_2_chas) / nrow(data_boston_housing)) * var(grupo_2_chas[[feature]])
+
+        cat(paste(feature, ':\n'))
+        cat(paste('Varianza intergrupo:', round(var_inter, 3), '\n\n'))
+    }
+}
