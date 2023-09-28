@@ -72,6 +72,10 @@ for (i in 1:numeroDeColumnas) {
 par(mfrow = c(1, 1))
 
 # Ejercicio 9.-
+# Como podemos apreciar en los siguientes graficos generados, los datos en las caracteristicas
+# crim, b, chas, zn, lstat tiene una gran cantidad de outlayers pero a pesar de todos se puede notar
+# La presencia de grupos bastantes definidos, también en los gráficos rad y tax, no se ve tanta lejanía entre
+# los datos pero la mediana se encuentra sesgada a un solo sitio.
 features_data = names(data_boston_housing)
 boxplot_list = list()
 size_col = ncol(data_boston_housing)
@@ -90,6 +94,10 @@ ggdraw() + draw_plot(grid_boxplot) + draw_plot(textGrob("Boxplot Boston Housing"
                                                x= 0.27, y= -0.35)
 
 # Ejercicio 10.-
+# En este ejercicio decidimos escoger las caracteristicas RM y LSTAT como factores con mayor
+# correlación en base al ejercicio 5.
+# Como se puede apreciar en los siguiente gráficos MEDV con RM tienen una fuerte correlación
+# postiva y MEDV con LSTAT tienen una correlación negativa.
 positive_corr = ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['rm']])) +
                   geom_point() +
                   geom_smooth(method=lm, se=FALSE) +
@@ -104,6 +112,19 @@ negative_corr = ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['l
 grid.arrange(positive_corr, negative_corr, ncol = 2)
 
 # Ejercicio 11.-
+# Como se puede apreciar en los valores entregados por el siguiente código,
+# si las formulas de simetría nos entregan un valor que en el caso de ser
+# positivo nos indica que los datos tienen una tendencia a la izquierda de
+# la media, como por ejemplo lo que ocurre con crim la cual tiene un valor de 5.192,
+# en el caso de ser negativa nos indica que los valores tienen una tendencia
+# a la derecha de la media, como por ejemplo con "b" la cual tiene un valor de -2.873.
+# En el caso de la curtosis cuando tenemos valores positivos estos quieren decir que
+# los datos están distrobuidos muy cercanos a la media provocando un mayor pico en su gráfico
+# como se puede apreciar en la característica crim el cual tiene como valor 36.596, y cuando
+# el valor de la curtosis es negativa quiere decir que los datos están muy esparcidos al rededor
+# de la media, como por ejemplo la característica indus la cual tiene un valor de -1.24.
+features_data <- names(data_boston_housing)
+
 for(feature in features_data) {
     asimetria = round(skewness(data_boston_housing[[feature]]), 3)
     curtosis = round(kurtosis(data_boston_housing[[feature]]), 3)
@@ -113,6 +134,14 @@ for(feature in features_data) {
 }
 
 # Ejercicio 12.-
+# Como podemos apreciar en los gráficos de densidad y con respecto a los resultados
+# obtenidos en la pregunta 11, la variable crim realmente tiene una mayor distribución
+# de sus datos en el lado izquierda y la característica "b" tiene mayor distribución a
+# la derecha comprobando lo dicho anteriormente, además si nos podemos fijar en relación
+# a la curtosis, los valores de la variable crim están muy concentrados provocando un
+# mayor pico en su gráfica y en la característica indus los datos están muy distribuidos
+# al rededor de su gráfica provocando que su curtosis sea negativa como lo dicho en el
+# ejercicio 11.
 features_data = names(data_boston_housing)
 densityplot_list = list()
 size_col = ncol(data_boston_housing)
@@ -135,7 +164,9 @@ ggdraw() + draw_plot(grid_densityplot) + draw_plot(textGrob("Densityplot Boston 
                                                x= 0.27, y= -0.35)
 
 # Ejercicio 13
-
+# En este ejercicio decidimos separar chas en los grupo 1 (osea si el tramo limita con el rio)
+# y el grupo 2 (caso contrario al grupo 1), de esta forma podremos ver las caracteristicas de
+# estos dos casos.
 grupo_1_chas = data_boston_housing[data_boston_housing$chas == 0, ]
 grupo_2_chas = data_boston_housing[data_boston_housing$chas == 1, ]
 
