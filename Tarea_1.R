@@ -94,6 +94,10 @@ ggdraw() + draw_plot(grid_boxplot) + draw_plot(textGrob("Boxplot Boston Housing"
                                                x= 0.27, y= -0.35)
 
 # Ejercicio 10.-
+# En este ejercicio decidimos escoger las caracteristicas RM y LSTAT como factores con mayor
+# correlación en base al ejercicio 5.
+# Como se puede apreciar en los siguiente gráficos MEDV con RM tienen una fuerte correlación
+# postiva y MEDV con LSTAT tienen una correlación negativa.
 positive_corr <- ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['rm']])) +
                   geom_point() +
                   geom_smooth(method=lm, se=FALSE) +
