@@ -112,6 +112,17 @@ negative_corr <- ggplot(data_boston_housing, aes(x= .data[['medv']], y= .data[['
 grid.arrange(positive_corr, negative_corr, ncol = 2)
 
 # Ejercicio 11.-
+# Como se puede apreciar en los valores entregados por el siguiente código,
+# si las formulas de simetría nos entregan un valor que en el caso de ser
+# positivo nos indica que los datos tienen una tendencia a la izquierda de
+# la media, como por ejemplo lo que ocurre con crim la cual tiene un valor de 5.192,
+# en el caso de ser negativa nos indica que los valores tienen una tendencia
+# a la derecha de la media, como por ejemplo con "b" la cual tiene un valor de -2.873.
+# En el caso de la curtosis cuando tenemos valores positivos estos quieren decir que
+# los datos están distrobuidos muy cercanos a la media provocando un mayor pico en su gráfico
+# como se puede apreciar en la característica crim el cual tiene como valor 36.596, y cuando
+# el valor de la curtosis es negativa quiere decir que los datos están muy esparcidos al rededor
+# de la media, como por ejemplo la característica indus la cual tiene un valor de -1.24.
 for(feature in features_data) {
     asimetria <- round(skewness(data_boston_housing[[feature]]), 3)
     curtosis <- round(kurtosis(data_boston_housing[[feature]]), 3)
