@@ -157,6 +157,7 @@ for(i in 1: size_col) {
     densityplot_list[[i]] <- ggplotGrob(densityplot_data)
 }
 
+grid_densityplot <- grid.arrange(grobs = densityplot_list)
 ggdraw() + draw_plot(grid_densityplot) + draw_plot(textGrob("Densityplot Boston Housing",
                                                         gp= gpar(fontsize= 20)),
                                                x= 0.27, y= -0.35)
@@ -168,7 +169,14 @@ ggdraw() + draw_plot(grid_densityplot) + draw_plot(textGrob("Densityplot Boston 
 grupo_1_chas <- data_boston_housing[data_boston_housing$chas == 0, ]
 grupo_2_chas <-  data_boston_housing[data_boston_housing$chas == 1, ]
 
-#Ejercicio 14
+# Ejercicio 14
+# Crim: La tasa de crimanilidad del grupo 1 en promedio es mayor a la del grupo 2 pero al
+#       tener una varianza mucho mayor esto significa que a pesar de que el grupo 1 tenga mayor
+#       tasa de criminalidad sus valores son más dispersos.
+# Zn: En promedio la proporción de terrenos residuales es mayor en el grupo 1 que en
+#     el 2 pero aún así los valores varían más en el grupo uno consiguiendo estabilidad en el 2.
+# Medv: En promedio las casas son más caras en el grupo 2 pero aún así sus valores varían mucho
+#       más en comparación al grupo 1 que tiene una varianza de 77.
 datos_grupo1 <- names(grupo_1_chas)
 datos_grupo2 <- names(grupo_2_chas)
 
@@ -201,7 +209,11 @@ cat("Resultados Grupo 1:\n", resultados_grupo1, sep = "")
 cat("Resultados Grupo 2:\n", resultados_grupo2, sep = "")
 
 # Ejercicio 15
-
+# Crim: La tasa de criminalidad de los dos grupos juntos es muy identica al grupo 1 y su
+#       varianza igual, esto significa que los datos del grupo 2 no son totalmente grandes
+#       en comparación al grupo 1.
+# Zn: Lo mismo que ocurría en la característica crim ocurre aquí, el analisis de la data
+#     del grupo 1 no varía en su totalidad al unir al grupo 2.
 features_data <- names(data_boston_housing)
 
 for(feature in features_data) {
@@ -211,11 +223,31 @@ for(feature in features_data) {
 
         cat(paste(feature, ':\n', sep = ''))
         cat(paste('Promedio:', round(mean_feature, 3), '\n'))
-        cat(paste('Varianza:', round(desv_feature, 3), '\n\n'))
+        cat(paste('Varianza:', round(var_feature, 3), '\n\n'))
     }
 }
 
 # Ejercicio 16
+# La varianza intragrupo del grupo 1 y 2 de la mayoría de las características es un poco alta
+# indicando que los valores de cada grupo están alejados de sus valores medios, aunque como caso
+# contrario tenemos la variable nox la cual tiene una varianza intragrupo de 0.013.
+features_data <- names(data_boston_housing)
+
+for(feature in features_data) {
+    if (feature != 'chas') {
+        var_intra <- (nrow(grupo_1_chas) / nrow(data_boston_housing)) * var(grupo_1_chas[[feature]]) +
+          (nrow(grupo_2_chas) / nrow(data_boston_housing)) * var(grupo_2_chas[[feature]])
+
+        cat(paste(feature, ':\n'))
+        cat(paste('Varianza intragrupo:', round(var_intra, 3), '\n\n'))
+    }
+}
+
+# Ejercicio 17
+# Muchas de las características tienen el calculo entre sus medias valores muy cercanos
+# ya que la varianza intergrupo es cercana a 0, aunque hay casos hay aislados como la caracteristica
+# tax el cual tiene una varianza intergrupo de 35.901 indicando que la media entre los grupos es muy
+# lejana.
 features_data <- names(data_boston_housing)
 
 for(feature in features_data) {
@@ -225,20 +257,7 @@ for(feature in features_data) {
                     ((mean(grupo_2_chas[[feature]]) - mean(data_boston_housing[[feature]]))^2)
 
         cat(paste(feature, ':\n'))
-        cat(paste('Varianza Intragrupo:', round(var_intra, 3), '\n\n'))
-    }
-}
-
-# Ejercicio 17
-features_data <- names(data_boston_housing)
-
-for(feature in features_data) {
-    if (feature != 'chas') {
-        var_intra <- (nrow(grupo_1_chas) / nrow(data_boston_housing)) * var(grupo_1_chas[[feature]]) +
-                    (nrow(grupo_2_chas) / nrow(data_boston_housing)) * var(grupo_2_chas[[feature]])
-
-        cat(paste(feature, ':\n'))
-        cat(paste('Varianza intergrupo:', round(var_inter, 3), '\n\n'))
+        cat(paste('Varianza Intergrupo:', round(var_inter, 3), '\n\n'))
     }
 }
 
