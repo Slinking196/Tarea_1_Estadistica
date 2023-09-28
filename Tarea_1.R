@@ -132,6 +132,14 @@ for(feature in features_data) {
 }
 
 # Ejercicio 12.-
+# Como podemos apreciar en los gráficos de densidad y con respecto a los resultados
+# obtenidos en la pregunta 11, la variable crim realmente tiene una mayor distribución
+# de sus datos en el lado izquierda y la característica "b" tiene mayor distribución a
+# la derecha comprobando lo dicho anteriormente, además si nos podemos fijar en relación
+# a la curtosis, los valores de la variable crim están muy concentrados provocando un
+# mayor pico en su gráfica y en la característica indus los datos están muy distribuidos
+# al rededor de su gráfica provocando que su curtosis sea negativa como lo dicho en el
+# ejercicio 11.
 features_data <- names(data_boston_housing)
 densityplot_list <- list()
 size_col <- ncol(data_boston_housing)
