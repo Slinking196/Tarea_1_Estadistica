@@ -162,6 +162,9 @@ ggdraw() + draw_plot(grid_densityplot) + draw_plot(textGrob("Densityplot Boston 
                                                x= 0.27, y= -0.35)
 
 #Ejercicio 13.-
+# En este ejercicio decidimos separar chas en los grupo 1 (osea si el tramo limita con el rio)
+# y el grupo 2 (caso contrario al grupo 1), de esta forma podremos ver las caracteristicas de
+# estos dos casos.
 grupo_1_chas <- data_boston_housing[data_boston_housing$chas == 0, ]
 grupo_2_chas <-  data_boston_housing[data_boston_housing$chas == 1, ]
 
