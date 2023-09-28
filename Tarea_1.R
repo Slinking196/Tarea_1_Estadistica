@@ -72,6 +72,10 @@ for (i in 1:numeroDeColumnas) {
 par(mfrow = c(1, 1))
 
 # Ejercicio 9.-
+# Como podemos apreciar en los siguientes graficos generados, los datos en las caracteristicas
+# crim, b, chas, zn, lstat tiene una gran cantidad de outlayers pero a pesar de todos se puede notar
+# La presencia de grupos bastantes definidos, también en los gráficos rad y tax, no se ve tanta lejanía entre
+# los datos pero la mediana se encuentra sesgada a un solo sitio.
 features_data <- names(data_boston_housing)
 boxplot_list <- list()
 size_col <- ncol(data_boston_housing)
