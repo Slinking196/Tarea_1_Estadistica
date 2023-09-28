@@ -16,10 +16,15 @@ library(ggplot2)
 library(GGally)
 
 # Ejercicio 1.-
+#Se realiza la carga de los datos en el dataset entregado,
+# luego se realiza una muestra de los datos a traves de la funcion head.
 data_boston_housing <- read.csv("BostonHousing.csv")
 head(data_boston_housing, n = 5)
 
 # Ejercicio 2.-
+#Se realizan calculos necesarios para generar las medidas de
+# estadisticas basicas, las medidas escogidas fueron la media,
+# mediana y la desviacion estandar.
 features_data <- names(data_boston_housing)
 
 for(feature in features_data) {
@@ -34,26 +39,34 @@ for(feature in features_data) {
 }
 
 # Ejercicio 3.-
-
+#Se realiza una matriz de graficos de los distintos graficos de
+# dispersion,se puede observar las distintas tendencias que poseen
+# los datos asi como las dispersiones de estos.
 pairs(data_boston_housing, pch= 20, col= 'purple')
 
 # Ejercicio 4.-
-
+#Se calcula la correlacion de pearson de las variables,luego se
+# hace una muestra de las correlaciones entre cada variable.
 correlacion <- cor(data_boston_housing, method= "pearson")
 print(correlacion)
 
-#Ejercicio 5.-
-
+# Ejercicio 5.-
+# Se realiza una visualizacion grafica de las correlaciones
+# calculadas,esto se logra a traves de los graficos de correlacion
+# de cada par de variable.
 options(repr.plot.width = 8, repr.plot.height = 8)
 corrplot(correlacion, method = "number", type = 'lower')
 corrplot(correlacion, method = "ellipse", type = 'lower')
 
 #Ejercicio 6.-
-
+# Se hace entrega de un mapa de calor de las correlaciones entre
+# cada par de variable,este mapa nos deja mas claro las variables
+# que mas correlacion tienen.
 corrplot(correlacion, method = "color", type = 'lower')
 
-#Ejercicio 7.-
-
+# Ejercicio 7.-
+# Se utiliza un pair plot para realizar otra visualizacion de las
+# variables correlacionadas
 new_data_corr <- data_boston_housing[, c("indus", "nox", "age", "dis", "rad", "tax")]
 pairs(new_data_corr, lower.panel = function(x, y) {
     points(x, y)
@@ -61,7 +74,8 @@ pairs(new_data_corr, lower.panel = function(x, y) {
 }, upper.panel = NULL)
 
 #Ejercicio 8.-
-
+# Se hace entrega de la matriz de histogramas, estos histogramas
+# representan la relacion de cada par de variable.
 numeroDeColumnas <- ncol(data_boston_housing)
 par(mfrow = c(ceiling(sqrt(numeroDeColumnas)), ceiling(sqrt(numeroDeColumnas))))
 
